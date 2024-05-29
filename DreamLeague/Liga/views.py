@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+#from .forms import DivisiónForm, EquipoForm, JugadorForm, DivisionSearchForm
+#from .models import División, Equipo, Jugador
 
-# Create your views here.
+
+def Base(request):
+    return render(request, "Liga/Base.html")
