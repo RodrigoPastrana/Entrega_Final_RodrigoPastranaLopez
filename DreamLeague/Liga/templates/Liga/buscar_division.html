@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar División</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('{% static "Liga/images/Fondo para inicio app Dream League.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            text-align: center;
+            padding-top: 50px;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+        .form-container, .result-container {
+            display: inline-block;
+            text-align: left;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            background-color: #fff;
+            width: 300px;
+            vertical-align: top;
+            margin: 0 50px;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        input[type="submit"], button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover, button:hover {
+            background-color: #45a049;
+        }
+        .result-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .result-container ul li {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .division-name {
+            font-size: 24px;
+            color: black;
+            margin-bottom: 10px;
+        }
+        .division-teams {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        .division-teams li:before {
+            content: "⚫ ";
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Buscar División</h1>
+        <div class="form-container">
+            <form action="{% url 'buscar_division' %}" method="get">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
+        <div class="result-container">
+            {% if resultados %}
+                <ul>
+                    {% for division in resultados %}
+                        <li>
+                            <span class="division-name">{{ division.nombre }}:</span>
+                            <ul class="division-teams">
+                                {% for equipo in division.equipo_set.all %}
+                                    <li>{{ equipo.nombre }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No se encontraron resultados.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
