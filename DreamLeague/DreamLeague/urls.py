@@ -18,12 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Liga import views as liga_views
+from Liga.views import registro, login_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", liga_views.Base, name="Base"),
-    path("login", liga_views.login, name="login"),
-    path("registro", liga_views.registro, name="registro"),
+    path("/login", liga_views.login_view, name="login_view"),
+    path("/registro", liga_views.registro, name="registro"),
     path("ligas", liga_views.ligas, name="ligas"),
     path("equipos", liga_views.equipos, name="equipos"),
     path("jugadores", liga_views.jugadores, name="jugadores"),
