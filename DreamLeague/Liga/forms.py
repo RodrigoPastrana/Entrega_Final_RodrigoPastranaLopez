@@ -1,5 +1,7 @@
 from django import forms
 from .models import Liga, Equipo, Jugador
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
 class LigaForm(forms.ModelForm):
@@ -22,3 +24,11 @@ class JugadorForm(forms.ModelForm):
 
 class LigaSearchForm(forms.Form):
     query = forms.CharField(label="Buscar liga", max_length=255)
+
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ("username", "email", "password1", "password2")
