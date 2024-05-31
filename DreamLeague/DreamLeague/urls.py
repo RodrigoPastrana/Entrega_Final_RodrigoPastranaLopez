@@ -26,6 +26,12 @@ urlpatterns = [
     path("/login", liga_views.login_view, name="login_view"),
     path("/registro", liga_views.registro, name="registro"),
     path("ligas", liga_views.ligas, name="ligas"),
+    path("buscar_liga", liga_views.buscar_liga, name="buscar_liga"),
+    path("lista_ligas", liga_views.lista_ligas, name="lista_ligas"),
     path("equipos", liga_views.equipos, name="equipos"),
+    path("buscar_equipo", liga_views.buscar_equipo, name="buscar_equipo"),
+    path("lista_equipos", liga_views.lista_equipos, name="lista_equipos"),
     path("jugadores", liga_views.jugadores, name="jugadores"),
+    path("buscar_jugador", liga_views.buscar_jugador, name="buscar_jugador"),
+    path("lista_jugadores", liga_views.lista_jugadores, name="lista_jugadores"),
 ]

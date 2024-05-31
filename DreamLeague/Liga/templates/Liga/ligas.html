@@ -39,6 +39,11 @@
                 <input type="submit" value="Crear División">
             </form>
         </div>
+        
+        <div class="button-container">
+            <a href="{% url 'buscar_liga' %}" class="button">Buscar una liga</a>
+            <a href="{% url 'lista_ligas' %}" class="button">Ver todas mis ligas</a>
+        </div>
     </div>
 
     <style>
@@ -51,14 +56,14 @@
         }
 
         .navbar {
-            padding-top: 20px; /* Ajuste de la altura para que esté al mismo nivel que en base.html */
-            margin-bottom: 40px; /* Ajuste de espacio para separar la barra de navegación del contenido */
-            background-color: transparent; /* Barra de navegación transparente */
+            padding-top: 20px;
+            margin-bottom: 40px;
+            background-color: transparent;
         }
 
         .navbar-brand,
         .nav-link {
-            color: white !important; /* Color de texto blanco */
+            color: white !important;
         }
 
         .container {
@@ -66,8 +71,8 @@
         }
 
         h1 {
-            font-size: 60px; /* Tamaño de fuente más grande */
-            color: white; /* Color blanco */
+            font-size: 60px;
+            color: white;
             margin-bottom: 30px;
         }
 
@@ -86,8 +91,33 @@
             background-color: #fff;
             width: 300px;
             vertical-align: top;
-            height: 400px; /* Ajusta la altura según sea necesario */
-            margin: 0 50px; /* Añadir espacio entre los contenedores */
+            height: 400px;
+            margin: 0 50px;
+        }
+
+        .button-container {
+            display: inline-block;
+            text-align: left;
+            vertical-align: top;
+            margin-top: 110px; /* Ajuste para bajar los botones */
+        }
+
+        .button-container .button {
+            display: block;
+            margin-bottom: 80px; /* Espacio adicional entre los botones */
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 40px; /* Aumentar el tamaño del botón */
+            font-size: 18px; /* Aumentar el tamaño de la letra */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .button-container .button:hover {
+            background-color: #45a049;
         }
 
         input[type="text"] {
@@ -97,7 +127,7 @@
             box-sizing: border-box;
         }
 
-        input[type="submit"], button {
+        input[type="submit"] {
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
@@ -106,7 +136,7 @@
             cursor: pointer;
         }
 
-        input[type="submit"]:hover, button:hover {
+        input[type="submit"]:hover {
             background-color: #45a049;
         }
 
@@ -117,3 +147,4 @@
     </style>
 </body>
 </html>
+

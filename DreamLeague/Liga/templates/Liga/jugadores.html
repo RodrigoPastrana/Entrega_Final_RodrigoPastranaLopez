@@ -40,6 +40,11 @@
             </form>
         </div>
         
+        <!-- Contenedor para los botones -->
+        <div class="button-container">
+            <a href="{% url 'buscar_jugador' %}" class="button">Buscar un jugador</a>
+            <a href="{% url 'lista_jugadores' %}" class="button">Ver todos mis jugadores</a>
+        </div>
     </div>
 
     <style>
@@ -76,7 +81,7 @@
             font-size: 18px;
             margin-bottom: 30px;
             font-weight: bold;
-            color: rgb(0, 0, 0); /* Color blanco */
+            color: rgb(0, 0, 0); /* Color negro */
         }
 
         .form-container {
@@ -90,6 +95,31 @@
             vertical-align: top;
             height: 400px; /* Ajusta la altura según sea necesario */
             margin: 0 50px; /* Añadir espacio entre los contenedores */
+        }
+
+        .button-container {
+            display: inline-block;
+            text-align: left;
+            vertical-align: top;
+            margin-top: 110px; /* Ajuste para bajar los botones */
+        }
+
+        .button-container .button {
+            display: block;
+            margin-bottom: 80px; /* Espacio adicional entre los botones */
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 40px; /* Aumentar el tamaño del botón */
+            font-size: 18px; /* Aumentar el tamaño de la letra */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .button-container .button:hover {
+            background-color: #45a049;
         }
 
         input[type="text"], select {
@@ -119,6 +149,7 @@
     </style>
 </body>
 </html>
+
 
 
 
