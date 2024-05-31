@@ -1,24 +1,139 @@
-<!-- templates/equipos_search.html -->
-{% extends "base_generic.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'Liga/css/styles.css' %}" rel="stylesheet" />
+    <title>Buscar Equipo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('{% static "Liga/assets/img/inicio_DreamLeague.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding-top: 80px; /* Ajuste para evitar que el contenido se solape con el navbar */
+        }
 
-{% block content %}
-  <h2>Buscar Equipo</h2>
-  <form method="GET" action="{% url 'buscar_equipo' %}">
-    <input type="text" name="query" placeholder="Nombre del Equipo" value="{{ request.GET.query }}">
-    <button type="submit">Buscar</button>
-  </form>
-  
-  {% if equipos %}
-    <h3>Resultados</h3>
-    <ul>
-      {% for equipo in equipos %}
-        <li>{{ equipo.nombre }}</li>
-        <ul>
-          {% for jugador in equipo.jugadores.all %}
-            <li>{{ jugador.nombre }}</li>
-          {% endfor %}
-        </ul>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endblock %}
+        .navbar {
+            padding-top: 20px; /* Ajuste de la altura para que esté al mismo nivel que en base.html */
+            margin-bottom: 40px; /* Ajuste de espacio para separar la barra de navegación del contenido */
+            background-color: transparent; /* Barra de navegación transparente */
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: white !important; /* Color de texto blanco */
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            color: white;
+            margin-top: 50px; /* Ajuste para mover el texto hacia abajo */
+        }
+        .form-container, .result-container {
+            display: inline-block;
+            text-align: left;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            background-color: #fff;
+            width: 300px;
+            vertical-align: top;
+            margin: 80px 50px 0; /* Ajuste de la posición vertical */
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .result-container ul li {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .division-name {
+            font-size: 24px;
+            color: black;
+            margin-bottom: 10px;
+        }
+        .division-teams {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        .division-teams li:before {
+            content: "⚫ ";
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="{% url 'Base' %}">Dream League</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login_view' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">Registrarme</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'ligas' %}">Ligas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'equipos' %}">Equipos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'jugadores' %}">Jugadores</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Buscar Equipo</h2>
+        <div class="form-container">
+            <form method="GET" action="{% url 'buscar_equipo' %}">
+                <input type="text" name="query" placeholder="Nombre del Equipo" value="{{ request.GET.query }}">
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="result-container">
+            {% if equipos %}
+                <h3>Resultados</h3>
+                <ul>
+                    {% for equipo in equipos %}
+                        <li>
+                            <span class="division-name">{{ equipo.nombre }}:</span>
+                            <ul class="division-teams">
+                                {% for jugador in equipo.jugadores.all %}
+                                    <li>{{ jugador.nombre }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No se encontraron resultados.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+

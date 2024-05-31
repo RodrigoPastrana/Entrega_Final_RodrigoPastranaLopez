@@ -39,11 +39,82 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background: url('{% static "Liga/assets/img/ligas_DreamLeague.jpg" %}') no-repeat center center fixed;
+        background: url('{% static "Liga/assets/img/inicio_DreamLeague.jpg" %}') no-repeat center center fixed;
         background-size: cover;
         margin: 0;
         padding: 0;
     }
+
+    .navbar {
+            padding-top: 20px; /* Ajuste de la altura para que esté al mismo nivel que en base.html */
+            margin-bottom: 40px; /* Ajuste de espacio para separar la barra de navegación del contenido */
+            background-color: transparent; /* Barra de navegación transparente */
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: white !important; /* Color de texto blanco */
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            color: white;
+            margin-top: 50px; /* Ajuste para mover el texto hacia abajo */
+        }
+        .form-container, .result-container {
+            display: inline-block;
+            text-align: left;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            background-color: #fff;
+            width: 300px;
+            vertical-align: top;
+            margin: 80px 50px 0; /* Ajuste de la posición vertical */
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .result-container ul li {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .division-name {
+            font-size: 24px;
+            color: black;
+            margin-bottom: 10px;
+        }
+        .division-teams {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        .division-teams li:before {
+            content: "⚫ ";
+            color: black;
+        }
     </style>
 </body>
 </html>
