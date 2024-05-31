@@ -21,6 +21,21 @@ def ligas(request):
     return render(request, "Liga/ligas.html", {"form": form})
 
 
+def buscar_liga(request):
+    form = LigaSearchForm()
+    resultados = None
+    if "query" in request.GET:
+        form = LigaSearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data["query"]
+            resultados = Liga.objects.filter(nombre__icontains=query)
+    return render(request, "Liga/buscar_liga.html", {"form": form, "resultados": resultados})
+
+
+def lista_ligas(request):
+    return render(request, "Liga/lista_ligas.html")
+
+
 def equipos(request):
     if request.method == "POST":
         form = EquipoForm(request.POST)
@@ -30,6 +45,14 @@ def equipos(request):
     else:
         form = EquipoForm()
     return render(request, "Liga/equipos.html", {"form": form})
+
+
+def buscar_equipo(request):
+    return render(request, "Liga/buscar_equipo.html")
+
+
+def lista_equipos(request):
+    return render(request, "Liga/lista_equipos.html")
 
 
 def jugadores(request):
@@ -43,15 +66,12 @@ def jugadores(request):
     return render(request, "Liga/jugadores.html", {"form": form})
 
 
-def buscar_division(request):
-    form = LigaSearchForm()
-    resultados = None
-    if "query" in request.GET:
-        form = LigaSearchForm(request.GET)
-        if form.is_valid():
-            query = form.cleaned_data["query"]
-            resultados = Liga.objects.filter(nombre__icontains=query)
-    return render(request, "Liga/buscar_division.html", {"form": form, "resultados": resultados})
+def buscar_jugador(request):
+    return render(request, "Liga/buscar_jugador.html")
+
+
+def lista_jugadores(request):
+    return render(request, "Liga/lista_jugadores.html")
 
 
 def registro(request):
