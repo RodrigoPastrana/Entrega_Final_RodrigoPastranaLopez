@@ -23,8 +23,8 @@ from Liga.views import registro, login_view
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", liga_views.Base, name="Base"),
-    path("/login", liga_views.login_view, name="login_view"),
-    path("/registro", liga_views.registro, name="registro"),
+    path("login", liga_views.login_view, name="login_view"),
+    path("registro", liga_views.registro, name="registro"),
     path("ligas", liga_views.ligas, name="ligas"),
     path("buscar_liga", liga_views.buscar_liga, name="buscar_liga"),
     path("lista_ligas", liga_views.lista_ligas, name="lista_ligas"),

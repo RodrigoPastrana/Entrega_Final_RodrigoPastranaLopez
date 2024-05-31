@@ -33,7 +33,12 @@ def buscar_liga(request):
 
 
 def lista_ligas(request):
-    return render(request, "Liga/lista_ligas.html")
+    ligas = Liga.objects.all()
+    return render(request, "Liga/lista_ligas.html", {"ligas": ligas})
+
+
+# def lista_ligas(request):
+#     return render(request, "Liga/lista_ligas.html")
 
 
 def equipos(request):
@@ -48,11 +53,31 @@ def equipos(request):
 
 
 def buscar_equipo(request):
-    return render(request, "Liga/buscar_equipo.html")
+    query = request.GET.get("query", "")
+    if query:
+        equipos = Equipo.objects.filter(nombre__icontains=query)
+    else:
+        equipos = []
+    return render(request, "Liga/buscar_equipo.html", {"equipos": equipos})
+
+
+# def buscar_equipo(request):
+#     query = request.GET.get("query")
+#     equipos = Equipo.objects.filter(nombre__icontains=query)
+#     return render(request, "Liga/buscar_equipo.html", {"equipos": equipos})
+
+
+# def buscar_equipo(request):
+#     return render(request, "Liga/buscar_equipo.html")
 
 
 def lista_equipos(request):
-    return render(request, "Liga/lista_equipos.html")
+    equipos = Equipo.objects.all()
+    return render(request, "Liga/lista_equipos.html", {"equipos": equipos})
+
+
+# def lista_equipos(request):
+#     return render(request, "Liga/lista_equipos.html")
 
 
 def jugadores(request):
@@ -67,11 +92,31 @@ def jugadores(request):
 
 
 def buscar_jugador(request):
-    return render(request, "Liga/buscar_jugador.html")
+    query = request.GET.get("query", "")
+    if query:
+        jugadores = Jugador.objects.filter(nombre__icontains=query)
+    else:
+        jugadores = []
+    return render(request, "Liga/buscar_jugador.html", {"jugadores": jugadores})
+
+
+# def buscar_jugador(request):
+#     query = request.GET.get("query")
+#     jugadores = Jugador.objects.filter(nombre__icontains=query)
+#     return render(request, "Liga/buscar_jugador.html", {"jugadores": jugadores})
+
+
+# def buscar_jugador(request):
+#     return render(request, "Liga/buscar_jugador.html")
 
 
 def lista_jugadores(request):
-    return render(request, "Liga/lista_jugadores.html")
+    jugadores = Jugador.objects.all()
+    return render(request, "Liga/lista_jugadores.html", {"jugadores": jugadores})
+
+
+# def lista_jugadores(request):
+#     return render(request, "Liga/lista_jugadores.html")
 
 
 def registro(request):
