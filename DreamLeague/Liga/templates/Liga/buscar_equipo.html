@@ -1,11 +1,24 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+<!-- templates/equipos_search.html -->
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h2>Buscar Equipo</h2>
+  <form method="GET" action="{% url 'buscar_equipo' %}">
+    <input type="text" name="query" placeholder="Nombre del Equipo" value="{{ request.GET.query }}">
+    <button type="submit">Buscar</button>
+  </form>
+  
+  {% if equipos %}
+    <h3>Resultados</h3>
+    <ul>
+      {% for equipo in equipos %}
+        <li>{{ equipo.nombre }}</li>
+        <ul>
+          {% for jugador in equipo.jugadores.all %}
+            <li>{{ jugador.nombre }}</li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

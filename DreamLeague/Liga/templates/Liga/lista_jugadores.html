@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+<!-- templates/ligas_list.html -->
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h2>Lista de jugadores</h2>
+  <ul>
+    {% for jugador in jugadores %}
+      <li>{{ jugador.nombre }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
