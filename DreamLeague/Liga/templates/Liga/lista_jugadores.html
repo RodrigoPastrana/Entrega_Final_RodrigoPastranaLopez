@@ -29,12 +29,19 @@
     </nav>
 
     <div class="container" style="margin-top: 100px;">
-      <h2>Lista de jugadores</h2>
-  <ul>
-    {% for jugador in jugadores %}
-      <li>{{ jugador.nombre }}</li>
-    {% endfor %}
-  </ul>
+        <h2>Lista de Jugadores</h2>
+        <ul>
+          {% for jugador in jugadores %}
+            <li>
+                <span style="color: white; font-size: 24px;">{{ jugador.nombre }}</span>
+              <a href="{% url 'editar_jugador' jugador.id %}">Editar</a>
+              <form method="POST" action="{% url 'eliminar_jugador' jugador.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este jugador?');">Eliminar</button>
+              </form>
+            </li>
+          {% endfor %}
+        </ul>
 <style>
     body {
         font-family: Arial, sans-serif;

@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import LigaForm, EquipoForm, JugadorForm, LigaSearchForm
 from .models import Liga, Equipo, Jugador
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import RegisterForm
+from django.contrib.auth import logout
 
 
 def Base(request):
@@ -37,8 +38,24 @@ def lista_ligas(request):
     return render(request, "Liga/lista_ligas.html", {"ligas": ligas})
 
 
-# def lista_ligas(request):
-#     return render(request, "Liga/lista_ligas.html")
+def editar_liga(request, pk):
+    liga = get_object_or_404(Liga, pk=pk)
+    if request.method == "POST":
+        form = LigaForm(request.POST, instance=liga)
+        if form.is_valid():
+            form.save()
+            return redirect("lista_ligas")
+    else:
+        form = LigaForm(instance=liga)
+    return render(request, "Liga/editar_liga.html", {"form": form})
+
+
+def eliminar_liga(request, pk):
+    liga = get_object_or_404(Liga, pk=pk)
+    if request.method == "POST":
+        liga.delete()
+        return redirect("lista_ligas")
+    return render(request, "Liga/confirmar_eliminacion_liga.html", {"obj": liga})
 
 
 def equipos(request):
@@ -53,22 +70,11 @@ def equipos(request):
 
 
 def buscar_equipo(request):
-    query = request.GET.get("query", "")
+    query = request.GET.get("q")
+    equipos = []
     if query:
         equipos = Equipo.objects.filter(nombre__icontains=query)
-    else:
-        equipos = []
-    return render(request, "Liga/buscar_equipo.html", {"equipos": equipos})
-
-
-# def buscar_equipo(request):
-#     query = request.GET.get("query")
-#     equipos = Equipo.objects.filter(nombre__icontains=query)
-#     return render(request, "Liga/buscar_equipo.html", {"equipos": equipos})
-
-
-# def buscar_equipo(request):
-#     return render(request, "Liga/buscar_equipo.html")
+    return render(request, "Liga/buscar_equipo.html", {"equipos": equipos, "query": query})
 
 
 def lista_equipos(request):
@@ -76,8 +82,24 @@ def lista_equipos(request):
     return render(request, "Liga/lista_equipos.html", {"equipos": equipos})
 
 
-# def lista_equipos(request):
-#     return render(request, "Liga/lista_equipos.html")
+def editar_equipo(request, pk):
+    equipo = get_object_or_404(Equipo, pk=pk)
+    if request.method == "POST":
+        form = EquipoForm(request.POST, instance=equipo)
+        if form.is_valid():
+            form.save()
+            return redirect("lista_equipos")
+    else:
+        form = EquipoForm(instance=equipo)
+    return render(request, "Liga/editar_equipo.html", {"form": form})
+
+
+def eliminar_equipo(request, pk):
+    equipo = get_object_or_404(Equipo, pk=pk)
+    if request.method == "POST":
+        equipo.delete()
+        return redirect("lista_equipos")
+    return render(request, "Liga/confirmar_eliminacion_equipo.html", {"obj": equipo})
 
 
 def jugadores(request):
@@ -100,23 +122,29 @@ def buscar_jugador(request):
     return render(request, "Liga/buscar_jugador.html", {"jugadores": jugadores})
 
 
-# def buscar_jugador(request):
-#     query = request.GET.get("query")
-#     jugadores = Jugador.objects.filter(nombre__icontains=query)
-#     return render(request, "Liga/buscar_jugador.html", {"jugadores": jugadores})
-
-
-# def buscar_jugador(request):
-#     return render(request, "Liga/buscar_jugador.html")
-
-
 def lista_jugadores(request):
     jugadores = Jugador.objects.all()
     return render(request, "Liga/lista_jugadores.html", {"jugadores": jugadores})
 
 
-# def lista_jugadores(request):
-#     return render(request, "Liga/lista_jugadores.html")
+def editar_jugador(request, pk):
+    jugador = get_object_or_404(Jugador, pk=pk)
+    if request.method == "POST":
+        form = JugadorForm(request.POST, instance=jugador)
+        if form.is_valid():
+            form.save()
+            return redirect("lista_jugadores")
+    else:
+        form = JugadorForm(instance=jugador)
+    return render(request, "Liga/editar_jugador.html", {"form": form})
+
+
+def eliminar_jugador(request, pk):
+    jugador = get_object_or_404(Jugador, pk=pk)
+    if request.method == "POST":
+        jugador.delete()
+        return redirect("lista_jugadores")
+    return render(request, "Liga/confirmar_eliminacion_liga.html", {"obj": jugador})
 
 
 def registro(request):
@@ -147,3 +175,8 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, "Liga/login.html", {"form": form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("Base")

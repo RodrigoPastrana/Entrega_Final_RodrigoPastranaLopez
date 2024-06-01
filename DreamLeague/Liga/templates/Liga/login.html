@@ -35,7 +35,12 @@
             {{ form.as_p }}
             <button type="submit">Login</button>
         </form>
-        
+        {% if user.is_authenticated %}
+    <form method="POST" action="{% url 'logout_view' %}">
+      {% csrf_token %}
+      <button type="submit">Cerrar sesión</button>
+    </form>
+  {% endif %}
     </div>
 
     <style>
