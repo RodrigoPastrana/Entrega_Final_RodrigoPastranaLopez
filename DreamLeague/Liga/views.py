@@ -11,6 +11,10 @@ def Base(request):
     return render(request, "Liga/Base.html")
 
 
+def sobre_mi(request):
+    return render(request, "Liga/sobre_mi.html")
+
+
 def ligas(request):
     if request.method == "POST":
         form = LigaForm(request.POST)
