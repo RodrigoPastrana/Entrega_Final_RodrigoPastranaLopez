@@ -30,7 +30,7 @@
             text-align: center;
         }
 
-        h2 {
+        h1 {
             font-size: 48px;
             margin-bottom: 30px;
             color: white;
@@ -47,13 +47,13 @@
             vertical-align: top;
             margin: 80px 50px 0; /* Ajuste de la posición vertical */
         }
-        input[type="text"] {
+        input[type="text"], select {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
             box-sizing: border-box;
         }
-        button {
+        input[type="submit"], button {
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
@@ -61,18 +61,14 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        button:hover {
+        input[type="submit"]:hover, button:hover {
             background-color: #45a049;
         }
-        
         .result-container ul {
-            text-align: top;
-            margin: 0;
+            list-style-type: none;
             padding: 0;
         }
         .result-container ul li {
-            
-            text-align: top;
             font-weight: bold;
             margin-bottom: 10px;
         }
@@ -112,33 +108,32 @@
         </div>
     </nav>
     <div class="container">
-        <h2>Buscar Equipo</h2>
+        <h1>Buscar Equipo</h1>
         <div class="form-container">
-            <form method="GET" action="{% url 'buscar_equipo' %}">
+            <form action="{% url 'buscar_equipo' %}" method="get">
                 <input type="text" name="q" placeholder="Buscar equipo..." value="{{ query }}">
-                <button type="submit">Buscar</button>
+                <input type="submit" value="Buscar">
             </form>
         </div>
         <div class="result-container">
             {% if query %}
-            <h2>Resultados para "{{ query }}":</h2>
-            {% if equipos %}
-                <ul>
-                    {% for equipo in equipos %}
-                        <li>
-                            <h3>{{ equipo.nombre }}</h3>
-                            <ul>
-                                {% for jugador in equipo.jugadores.all %}
-                                    <li>{{ jugador.nombre }}</li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No se encontraron equipos.</p>
+                {% if equipos %}
+                    <ul>
+                        {% for equipo in equipos %}
+                            <li>
+                                <span class="division-name">{{ equipo.nombre }}:</span>
+                                <ul class="division-teams">
+                                    {% for jugador in equipo.jugadores.all %}
+                                        <li>{{ jugador.nombre }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No se encontraron equipos.</p>
+                {% endif %}
             {% endif %}
-        {% endif %}
         </div>
     </div>
 </body>

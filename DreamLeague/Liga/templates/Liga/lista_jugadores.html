@@ -34,7 +34,8 @@
         <ul>
           {% for jugador in jugadores %}
             <li>
-                <span style="color: white; font-size: 24px;">{{ jugador.nombre }}</span>
+                <g><span class="icon">⚫{{ jugador.nombre }}</span></g>
+              <a href="{% url 'detalle_jugador' jugador.pk %}" class="btn btn-info btn-sm">Detalle</a>
               <a href="{% url 'editar_jugador' jugador.id %}">Editar</a>
               <form method="POST" action="{% url 'eliminar_jugador' jugador.id %}" style="display:inline;">
                 {% csrf_token %}
@@ -122,6 +123,23 @@
             content: "⚫ ";
             color: black;
         }
+
+        g {
+                font-size: 28px;
+                color: rgb(255, 255, 255);
+            }
+
+            .icon {
+            color: rgb(255, 255, 255);
+            margin-right: 10px;
+        }
+
+        .btn-info.btn-sm {
+            padding: 6px 12px; /* Ajuste del padding para que sea igual al del botón de "Eliminar" */
+            font-size: 17px; /* Tamaño de fuente igual al del botón de "Eliminar" */
+            text-transform: none;
+        }
+        
     </style>
 </body>
 </html>

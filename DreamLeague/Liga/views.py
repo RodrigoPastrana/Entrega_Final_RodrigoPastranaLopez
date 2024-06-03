@@ -42,6 +42,11 @@ def lista_ligas(request):
     return render(request, "Liga/lista_ligas.html", {"ligas": ligas})
 
 
+def detalle_liga(request, pk):
+    liga = get_object_or_404(Liga, pk=pk)
+    return render(request, "Liga/detalle_liga.html", {"liga": liga})
+
+
 def editar_liga(request, pk):
     liga = get_object_or_404(Liga, pk=pk)
     if request.method == "POST":
@@ -84,6 +89,11 @@ def buscar_equipo(request):
 def lista_equipos(request):
     equipos = Equipo.objects.all()
     return render(request, "Liga/lista_equipos.html", {"equipos": equipos})
+
+
+def detalle_equipo(request, pk):
+    equipo = get_object_or_404(Equipo, pk=pk)
+    return render(request, "Liga/detalle_equipo.html", {"equipo": equipo})
 
 
 def editar_equipo(request, pk):
@@ -129,6 +139,11 @@ def buscar_jugador(request):
 def lista_jugadores(request):
     jugadores = Jugador.objects.all()
     return render(request, "Liga/lista_jugadores.html", {"jugadores": jugadores})
+
+
+def detalle_jugador(request, pk):
+    jugador = get_object_or_404(Jugador, pk=pk)
+    return render(request, "Liga/detalle_jugador.html", {"jugador": jugador})
 
 
 def editar_jugador(request, pk):

@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle jugador</title>
+</head>
+<body>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('{% static "Liga/assets/img/inicio_DreamLeague.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            text-align: center
+        }
+
+        h1{
+            font-size: 41px;
+            color: white;
+        }
+        
+        h2{
+            font-size: 32px;
+            color: white;
+        }
+        
+        ul {
+            font-size: 23px;
+            color: white;
+        }
+
+        a{
+            font-size: 18px;
+            color: rgb(21, 255, 0);
+        }
+
+        .icon {
+            color: rgb(0, 0, 0);
+            margin-right: 10px;
+        }
+
+        </style>
+
+    <h1>Detalle del jugador: {{ jugador.nombre }}</h1>
+    <h2>- Equipo:</h2>
+    <ul>
+        <p><span class="icon">⚫</span>{{ jugador.equipo.nombre }}</p>
+    </ul>
+    <a href="{% url 'lista_jugadores' %}" class="btn btn-secondary btn-sm">Volver</a>
+</body>
+</html>

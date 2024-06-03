@@ -30,7 +30,7 @@
     </nav>
 
     <div class="container" style="margin-top: 100px;">
-        <h1>Equipos</h1>
+        <h1 class="titulo">Equipos</h1>
         
         <div class="form-container">
             <p class="texto">Crea un nuevo equipo:</p>
@@ -51,7 +51,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('{% static "Liga/assets/img/equipos_DreamLeague.jpg" %}') no-repeat center center fixed;
+            background: url('{% static "Liga/assets/img/foto_fondo_equipos_DreamLeague.jpg" %}') no-repeat center center fixed;
             background-size: cover;
             margin: 0;
             padding: 0;
@@ -72,8 +72,15 @@
             text-align: center;
         }
 
+        .titulo {
+    background-color: rgba(255, 255, 255, 0); /* Fondo negro semi-transparente */
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 5px;
+}
+
         h1 {
-            font-size: 48px;
+            font-size: 59px;
             margin-bottom: 30px;
             color: rgb(0, 0, 0); /* Color negro */
         }

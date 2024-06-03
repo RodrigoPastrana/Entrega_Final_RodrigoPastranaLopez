@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +7,51 @@
     <title>Editar Equipo</title>
 </head>
 <body>
+  <style>
+    body {
+            font-family: Arial, sans-serif;
+            background: url('{% static "Liga/assets/img/inicio_DreamLeague.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            text-align: center
+        }
+
+    h2 {
+      font-size: 41px;
+      color: rgb(255, 255, 255);
+    }
+    
+    form {
+      font-size: 23px;
+      color: rgb(255, 255, 255);
+    }
+    
+    button {
+      font-size: 17px;
+      margin-bottom: 20px;
+    }
+    
+    input[type="text"] {
+      font-size: 18px;
+      width: 200px; /* Ajusta el ancho de la barra de entrada */
+      margin-right: 10px; /* Agrega un margen a la derecha para separarlo del siguiente elemento */
+    
+    }
+    
+    .btn-secondary.btn-sm {
+      margin-top: 10px;
+      font-size: 18px;
+      color: rgb(21, 255, 0);
+    }
+
+  </style>
     <h2>Editar Equipo</h2>
   <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Guardar cambios</button>
   </form>
+  <a href="{% url 'lista_equipos' %}" class="btn btn-secondary btn-sm">Volver</a>
 </body>
 </html>

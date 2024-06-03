@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle equipo</title>
+</head>
+<body>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('{% static "Liga/assets/img/inicio_DreamLeague.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            text-align: center
+        }
+
+        h1{
+            font-size: 41px;
+            color: white;
+        }
+        
+        h2{
+            font-size: 32px;
+            color: white;
+        }
+        
+        ul {
+            font-size: 23px;
+            color: white;
+        }
+
+        a{
+            font-size: 18px;
+            color: rgb(21, 255, 0);
+        }
+
+        .icon {
+            color: rgb(0, 0, 0); 
+            margin-right: 10px;
+        }
+
+        </style>
+
+    <h1>Detalle del equipo: {{ equipo.nombre }}</h1>
+    <h2>- Jugadores:</h2>
+    <ul>
+        {% for jugador in equipo.jugadores.all %}
+        <li><span class="icon">⚫</span>{{ jugador.nombre }}</li>
+    {% endfor %}
+    <a href="{% url 'lista_equipos' %}" class="btn btn-secondary btn-sm">Volver</a>
+</body>
+</html>
