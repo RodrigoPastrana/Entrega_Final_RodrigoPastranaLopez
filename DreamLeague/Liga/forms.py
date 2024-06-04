@@ -2,6 +2,8 @@ from django import forms
 from .models import Liga, Equipo, Jugador
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
+from django.utils.translation import gettext_lazy as _
 
 
 class LigaForm(forms.ModelForm):
@@ -43,3 +45,13 @@ class RegisterForm(UserCreationForm):
         )
         self.fields["password1"].help_text = "Tu contraseña debe tener al menos 8 caracteres."
         self.fields["password2"].help_text = "Repite la misma contraseña."
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    error_messages = {
+        "invalid_login": _(
+            "Por favor, introduce un nombre de usuario y contraseña correctos. "
+            "Ten en cuenta que ambos campos pueden ser sensibles a mayúsculas y minúsculas."
+        ),
+        "inactive": _("Esta cuenta está inactiva."),
+    }

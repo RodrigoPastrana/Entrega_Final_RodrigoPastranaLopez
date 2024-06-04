@@ -20,13 +20,14 @@ from django.urls import path
 from Liga import views as liga_views
 from Liga.views import registro, login_view
 from django.contrib.auth.views import LogoutView
+from Liga.forms import CustomAuthenticationForm
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", liga_views.Base, name="Base"),
     path("sobre_mi", liga_views.sobre_mi, name="sobre_mi"),
-    path("login", liga_views.login_view, name="login_view"),
+    path("login/", liga_views.login_view, name="login_view"),
     path("logout", liga_views.logout_view, name="logout_view"),
     path("registro", liga_views.registro, name="registro"),
     path("ligas", liga_views.ligas, name="ligas"),
