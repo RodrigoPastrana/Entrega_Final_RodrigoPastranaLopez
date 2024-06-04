@@ -13,7 +13,7 @@ class LigaForm(forms.ModelForm):
 class EquipoForm(forms.ModelForm):
     class Meta:
         model = Equipo
-        fields = ["nombre", "division"]
+        fields = ["nombre", "liga"]
 
 
 class JugadorForm(forms.ModelForm):
@@ -43,5 +43,3 @@ class RegisterForm(UserCreationForm):
         )
         self.fields["password1"].help_text = "Tu contraseña debe tener al menos 8 caracteres."
         self.fields["password2"].help_text = "Repite la misma contraseña."
-
-

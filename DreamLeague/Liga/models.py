@@ -10,7 +10,7 @@ class Liga(models.Model):
 
 class Equipo(models.Model):
     nombre = models.CharField(max_length=255, unique=True)
-    division = models.ForeignKey(Liga, on_delete=models.CASCADE)
+    liga = models.ForeignKey(Liga, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre
