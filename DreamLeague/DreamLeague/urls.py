@@ -21,6 +21,7 @@ from Liga import views as liga_views
 from Liga.views import registro, login_view
 from django.contrib.auth.views import LogoutView
 from Liga.forms import CustomAuthenticationForm
+from Liga.views import ligas, equipos, jugadores, custom_login
 
 
 urlpatterns = [
@@ -30,6 +31,10 @@ urlpatterns = [
     path("login/", liga_views.login_view, name="login_view"),
     path("logout", liga_views.logout_view, name="logout_view"),
     path("registro", liga_views.registro, name="registro"),
+    path("ligas/", ligas, name="ligas"),
+    path("equipos/", equipos, name="equipos"),
+    path("jugadores/", jugadores, name="jugadores"),
+    path("accounts/login/", custom_login, name="login"),
     path("ligas", liga_views.ligas, name="ligas"),
     path("buscar_liga", liga_views.buscar_liga, name="buscar_liga"),
     path("lista_ligas", liga_views.lista_ligas, name="lista_ligas"),

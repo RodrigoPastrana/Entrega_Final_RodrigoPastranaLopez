@@ -31,6 +31,9 @@
 
     <div class="container" style="margin-top: 100px;">
         <h2 style="color: #000000;">Login</h2>
+        {% if message %}
+        <p>{{ message }}</p>
+        {% endif %}
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}

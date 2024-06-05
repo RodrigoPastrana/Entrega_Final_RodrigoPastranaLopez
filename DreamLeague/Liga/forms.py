@@ -13,19 +13,35 @@ class LigaForm(forms.ModelForm):
 
 
 class EquipoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields["liga"].queryset = Liga.objects.filter(usuario=user)
+
     class Meta:
         model = Equipo
         fields = ["nombre", "liga"]
 
 
 class JugadorForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields["equipo"].queryset = Equipo.objects.filter(usuario=user)
+
     class Meta:
         model = Jugador
         fields = ["nombre", "equipo"]
 
 
 class LigaSearchForm(forms.Form):
-    query = forms.CharField(label="Buscar liga", max_length=255)
+    query = forms.CharField(label="", max_length=255)
+
+    def __init__(self, *args, **kwargs):
+        super(LigaSearchForm, self).__init__(*args, **kwargs)
+        self.fields["query"].widget.attrs["placeholder"] = "Nombre de la liga"
 
 
 class RegisterForm(UserCreationForm):
