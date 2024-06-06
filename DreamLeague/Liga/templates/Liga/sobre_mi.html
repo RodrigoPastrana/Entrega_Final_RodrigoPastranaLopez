@@ -48,16 +48,29 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
+                        {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'login_view' %}">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">Registrarme</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'ligas' %}">Ligas</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'equipos' %}">Equipos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'jugadores' %}">Jugadores</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'sobre_mi' %}">Sobre mí</a></li>
+                        <li class="nav-item username-link" style="display: flex; align-items: center;">
+                            <a class="nav-link" href="{% url 'login_view' %}" style="color: #ffffff !important; font-weight: bold; padding: 0;">
+                                <span style="border-left: 2px solid black; border-right: 2px solid black; padding: 0 10px; height: 25px; line-height: 25px; font-size: 18px; font-weight: bold;">{{ user.username }}</span>
+                            </a>
+                        </li>                                              
+                            {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login_view' %}">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'ligas' %}">Ligas</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'equipos' %}">Equipos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'jugadores' %}">Jugadores</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'sobre_mi' %}">Sobre mí</a></li>
+                            {% endif %}
+                        </li>
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> 
         <section class="content-section">
             <h1>Sobre mí</h1>
             <p>Me llamo Rodrigo Pastrana Lopez, tengo 24 años y soy un principiante en el mundo de la programación. Me gusta el fútbol y por eso decidí crear algo relacionado con este deporte.</p>
