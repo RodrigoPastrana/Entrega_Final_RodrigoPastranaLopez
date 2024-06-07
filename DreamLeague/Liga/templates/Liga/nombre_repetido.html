@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ligas</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<h2>Nombre ya usado</h2>
+  <p>El nombre "{{ obj.nombre }}" ya existe</p>
+    <a href="{% url 'ligas_list' %}">Aceptar</a>
+</body>
+</html>

@@ -50,7 +50,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Login</button>
+            <button type="submit">Iniciar sesión</button>
         </form>
         {% if user.is_authenticated %}
     <form method="POST" action="{% url 'logout_view' %}">

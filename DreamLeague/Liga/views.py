@@ -8,6 +8,7 @@ from .forms import RegisterForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
+from django.contrib import messages
 
 
 def Base(request):
@@ -25,10 +26,15 @@ def ligas(request):
         if form.is_valid():
             liga = form.save(commit=False)
             liga.usuario = request.user
-            liga.save()
-            return redirect("Base")
+            if Liga.objects.filter(nombre=liga.nombre, usuario=request.user).exists():
+                messages.error(request, f'La liga "{liga.nombre}" ya existe.')
+            else:
+                liga.save()
+                messages.success(request, f'La liga "{liga.nombre}" ha sido creada con éxito.')
+                return redirect("ligas")
     else:
         form = LigaForm()
+
     return render(request, "Liga/ligas.html", {"form": form})
 
 
@@ -85,8 +91,13 @@ def equipos(request):
         if form.is_valid():
             equipo = form.save(commit=False)
             equipo.usuario = request.user
-            equipo.save()
-            return redirect("Base")
+            if Equipo.objects.filter(nombre=equipo.nombre, usuario=request.user).exists():
+                messages.error(request, f'El equipo "{equipo.nombre}" ya existe.')
+            else:
+                equipo.save()
+                messages.success(request, f'El equipo "{equipo.nombre}" ha sido creado con éxito.')
+                return redirect("equipos")
+        ligas = Liga.objects.filter(usuario=request.user)
     else:
         form = EquipoForm(user=request.user)
         ligas = Liga.objects.filter(usuario=request.user)
@@ -144,8 +155,12 @@ def jugadores(request):
         if form.is_valid():
             jugador = form.save(commit=False)
             jugador.usuario = request.user
-            jugador.save()
-            return redirect("Base")
+            if Jugador.objects.filter(nombre=jugador.nombre, usuario=request.user).exists():
+                messages.error(request, f'El jugador "{jugador.nombre}" ya existe.')
+            else:
+                jugador.save()
+                messages.success(request, f'El jugador "{jugador.nombre}" ha sido creado con éxito.')
+                return redirect("jugadores")
     else:
         form = JugadorForm(user=request.user)
     return render(request, "Liga/jugadores.html", {"form": form})
