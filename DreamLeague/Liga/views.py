@@ -19,6 +19,15 @@ def sobre_mi(request):
     return render(request, "Liga/sobre_mi.html")
 
 
+def redirect_if_not_authenticated(view_func):
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect("login_view")
+        return view_func(request, *args, **kwargs)
+
+    return wrapper
+
+
 @login_required
 def ligas(request):
     if request.method == "POST":
@@ -234,9 +243,15 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("Base")
+                next_page = request.GET.get("next", "Base")
+                return redirect(next_page)
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, error)
     else:
         form = CustomAuthenticationForm()
+
     return render(request, "Liga/login.html", {"form": form})
 
 
@@ -246,9 +261,23 @@ def logout_view(request):
 
 
 def custom_login(request, *args, **kwargs):
-    if request.user.is_authenticated:
-        return redirect("Base")
+    if request.method == "POST":
+        form = CustomAuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                next_page = request.GET.get("next", "Base")
+                return redirect(next_page)
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, error)
     else:
-        message = "Es necesario iniciar sesión para crear ligas, equipos o jugadores."
-        context = {"message": message}
-        return LoginView.as_view(template_name="Liga/login.html", extra_context=context)(request, *args, **kwargs)
+        form = CustomAuthenticationForm()
+
+    message = "Es necesario iniciar sesión para crear ligas, equipos o jugadores."
+    context = {"message": message, "form": form}
+    return render(request, "Liga/login.html", context)

@@ -4,7 +4,7 @@ Comisión: 54140
 
 Alumno: Rodrigo Pastrana Lopez
 
-## Link de video para ver la pagina web: https://youtu.be/Hq_s7ryCaAY
+## Link de video para ver la pagina web: https://youtu.be/vyHt1VK3Ex0
 
 ## Este proyecto es para crear tus propias ligas de futbol, en la web podemos ver que podemos agregar: ⚫ ligas, ⚫ Equipos (que se guardaran dentro de las ligas) y ⚫ Futbolistas (que se guardaran dentro de equipos). Tambien nos permite crear una cuenta y logearnos.
 

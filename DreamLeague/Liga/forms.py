@@ -64,6 +64,16 @@ class RegisterForm(UserCreationForm):
 
 
 class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        label="Usuario",
+        max_length=254,
+        widget=forms.TextInput(attrs={"placeholder": "Usuario"}),
+    )
+    password = forms.CharField(
+        label="Contraseña",
+        widget=forms.PasswordInput(attrs={"placeholder": "Contraseña"}),
+    )
+
     error_messages = {
         "invalid_login": _(
             "Por favor, introduce un nombre de usuario y contraseña correctos. "
